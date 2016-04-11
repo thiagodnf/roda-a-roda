@@ -1,5 +1,4 @@
-var error_audio,
-    selected_word,
+var selected_word,
     available_words,
     is_correct = false,
     words = [];
@@ -24,16 +23,22 @@ function getAllIndexes(word, letter){
 }
 
 function finished(){
-    alert("Parabéns, você acertou!");
+    $("#modal-congratulations").modal('show');
+    var sound = new Howl({urls: ['mus/applause.mp3']}).play();
     showTheAnswer();
     $("#risk-the-answer").attr("disabled","disabled");
     $(".letters").attr("disabled","disabled");
 }
 
 function init(){
+    // enable vibration support
+    navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
     jQuery.support.cors = true;
 
     $.get("https://raw.githubusercontent.com/thiagodnf/roda-a-roda/master/data/data.json", function(data){
+        $("#content").removeClass("hide");
+        $("#loading").hide();
         available_words = JSON.parse(data)
         nextWord();
     });
@@ -44,8 +49,8 @@ function getIntRandom(min,max){
 }
 
 function nextWord(){
-    var index1 = getIntRandom(0,available_words.data.length-1);
-    var index2 = getIntRandom(0,available_words.data[index1].words.length-1);
+    var index1 = getIntRandom(0, available_words.data.length-1);
+    var index2 = getIntRandom(0, available_words.data[index1].words.length-1);
 
     var hint = available_words.data[index1].hint;
     var word = available_words.data[index1].words[index2];
@@ -64,7 +69,7 @@ function nextWord(){
         $("#letter_"+i).hide();
     }
 
-    $("#hint").text(selected_word.hint.toUpperCase());
+    $("#hint").val(selected_word.hint.toUpperCase());
 }
 
 $(function(){
@@ -75,8 +80,9 @@ $(function(){
         var indexes = getAllIndexes(selected_word.word, letter);
 
         if(indexes.length == 0){
-            console.log("Letra não encontrada");
+            if(navigator.vibrate != null) navigator.vibrate(30);
         }else{
+            var sound = new Howl({urls: ['mus/correct.mp3']}).play();
             for(var i=0;i<indexes.length;i++){
                 $("#letter_"+indexes[i]).text(letter);
             }
@@ -107,16 +113,17 @@ $(function(){
 	});
 
     $("#btn-risk-the-answer").click(function(){
-        if($("#the-anwser").val() == selected_word.word){
+        if($("#the-anwser").val().toUpperCase() == selected_word.word.toUpperCase()){
             finished();
         }else{
-
+            alert("Você errou! Tente novamente.")
         }
 
         $("#modal-risk-the-answer").modal('toggle');
     });
 
-    $("#btn-restart").click(function(){
+    $("#btn-next-word").click(function(){
+        if(navigator.vibrate != null) navigator.vibrate(30);
         nextWord();
     });
 
