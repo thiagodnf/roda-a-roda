@@ -34,7 +34,7 @@ function init(){
     jQuery.support.cors = true;
 
     $.get("https://raw.githubusercontent.com/thiagodnf/roda-a-roda/master/data/data.json", function(data){
-        available_words = JSON.parse("\"data\":"+data+"")
+        available_words = JSON.parse(data)
         nextWord();
     });
 }
@@ -44,16 +44,21 @@ function getIntRandom(min,max){
 }
 
 function nextWord(){
-    console.log(available_words)
-    console.log(available_words.length);
-    var index = getIntRandom(0,available_words.length);
-    console.log(index);
+    var index1 = getIntRandom(0,available_words.data.length-1);
+    var index2 = getIntRandom(0,available_words.data[index1].words.length-1);
 
-    selected_word = {hint:"carro", word:"motor",hits:[]};
+    var hint = available_words.data[index1].hint;
+    var word = available_words.data[index1].words[index2];
+
+    selected_word = {hint:hint, word:word,hits:[]};
 
     $("#risk-the-answer").removeAttr("disabled","disabled");
     $(".letters").removeAttr("disabled");
     $(".accepted-letter").text("");
+
+    for(var i=0;i<12;i++){
+        $("#letter_"+i).show();
+    }
 
     for(var i=selected_word.word.length;i<12;i++){
         $("#letter_"+i).hide();

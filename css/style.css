@@ -17,14 +17,13 @@ body{
 #hint{
 	font-size: 2vw;
 	text-align: center;
-	border: 1px solid #092d6d;
-	padding-top: 10px;
+	border: 6px solid #e1e202;
 	padding-bottom: 10px;
-	text-shadow: 2px 2px black;
-	margin-top: 15px;
+	padding-top: 10px;
 	margin-bottom: 15px;
-	background-color: #0c3b94;
+	background-color: #e1e202;
 	border-radius: 6px;
+	color: black;
 }
 
 .fullWidth {
@@ -37,8 +36,8 @@ body{
 .answer{
 	border-radius: 6px;
 	margin-top: 30px;
-	margin-bottom: 30px;
 	border: 6px solid #e1e202;
+	margin-bottom: 20px;
 	box-shadow: 5px 5px 5px black;
 }
 
