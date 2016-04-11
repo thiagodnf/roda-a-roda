@@ -1,5 +1,6 @@
 var error_audio,
     selected_word,
+    available_words,
     is_correct = false,
     words = [];
 
@@ -31,26 +32,23 @@ function finished(){
 
 function init(){
     jQuery.support.cors = true;
-    
-    $.ajax({
-        url: "https://docs.google.com/uc?id=0BwXuWbTb4L_rMjhDc3FKS2wwNnM&export=download",
-        async:false,
-        type: "POST",
-        crossDomain : true,
-        dataType: "json",
-        success: function (result) {
-            JSON.parse(result);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr);
-        }
+
+    $.get("https://raw.githubusercontent.com/thiagodnf/roda-a-roda/master/data/data.json", function(data){
+        available_words = JSON.parse("\"data\":"+data+"")
+        nextWord();
     });
-    //$.getJSON("https://docs.google.com/uc?id=0BwXuWbTb4L_rMjhDc3FKS2wwNnM&export=download",function(){
-    //    console.log("Oi");
-    //});
 }
 
-function start(){
+function getIntRandom(min,max){
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+function nextWord(){
+    console.log(available_words)
+    console.log(available_words.length);
+    var index = getIntRandom(0,available_words.length);
+    console.log(index);
+
     selected_word = {hint:"carro", word:"motor",hits:[]};
 
     $("#risk-the-answer").removeAttr("disabled","disabled");
@@ -114,10 +112,8 @@ $(function(){
     });
 
     $("#btn-restart").click(function(){
-        start();
+        nextWord();
     });
 
     init();
-
-    start();
 });
