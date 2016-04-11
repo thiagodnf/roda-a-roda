@@ -5,7 +5,7 @@ Jogo Baseado no Programa "Roda a Roda" do Silvio Santos
 
 #Como jogar?
 
-É simples: veja a dica da palavra escondida e clique em uma das letras até que a palavra apareça. Caso já saiba a resposta, você pode clicar no botão "chutar" e digitar a palavra escondida. Sempre que uma letra e selecionada, ela não pode ser novamente pressionada.
+É simples: veja a dica da palavra escondida e clique em uma das letras até que a palavra apareça. Caso já saiba a resposta, você pode clicar no botão "chutar" e digitar a palavra escondida. Se uma letra já foi selecionada, ela não pode ser novamente pressionada.
 
 #Acesse:
 
