@@ -1,5 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/thiagodnf/estacao-do-ano-agora/master/img/favicon/android-icon-72x72.png)
-# Estação do Ano Agora
+![alt tag](https://raw.githubusercontent.com/thiagodnf/roda-a-roda/master/img/logo-2-black.png)
 
 Jogo Baseado no Programa "Roda a Roda" do Silvio Santos
 
