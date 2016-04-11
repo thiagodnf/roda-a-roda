@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  	<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+		<meta name="description" content="Jogo Roda a Roda do Silvio Santos">
+	  	<meta name="author" content="Thiago Nascimento">
+		<meta name="keywords" content="silvio santos, roda a roda, roda a roda silvio santos">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Estação">
+		<meta name="robots" content="index, follow">
+
+		<link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="img/favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#000">
+		<meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#000">
+
+		<link href='https://fonts.googleapis.com/css?family=Caveat+Brush' rel='stylesheet' type='text/css'>
+		<title>Roda a Roda</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div class="container" >
+			<h1 id="title">Roda a Roda</h1>
+			<div class="row answer">
+				<div class="col-xs-1 accepted-letter"  id="letter_0"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_1"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_2"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_3"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_4"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_5"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_6"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_7"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_8"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_9"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_10"></div>
+				<div class="col-xs-1 accepted-letter" id="letter_11"></div>
+			</div>
+			<p>Dica:</p>
+			<div class="row">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6">
+					<div id="hint"></div>
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+
+			<p>Escolha uma letra:</p>
+			<br>
+			<center>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-default letters" id="letter_A">A</button>
+					<button type="button" class="btn btn-default letters" id="letter_B">B</button>
+					<button type="button" class="btn btn-default letters" id="letter_C">C</button>
+					<button type="button" class="btn btn-default letters" id="letter_D">D</button>
+					<button type="button" class="btn btn-default letters" id="letter_E">E</button>
+					<button type="button" class="btn btn-default letters" id="letter_F">F</button>
+					<button type="button" class="btn btn-default letters" id="letter_G">G</button>
+					<button type="button" class="btn btn-default letters" id="letter_H">H</button>
+					<button type="button" class="btn btn-default letters" id="letter_I">I</button>
+					<button type="button" class="btn btn-default letters" id="letter_J">J</button>
+					<button type="button" class="btn btn-default letters" id="letter_K">K</button>
+					<button type="button" class="btn btn-default letters" id="letter_L">L</button>
+					<button type="button" class="btn btn-default letters" id="letter_M">M</button>
+					<button type="button" class="btn btn-default letters" id="letter_N">N</button>
+					<button type="button" class="btn btn-default letters" id="letter_O">O</button>
+					<button type="button" class="btn btn-default letters" id="letter_P">P</button>
+					<button type="button" class="btn btn-default letters" id="letter_Q">Q</button>
+					<button type="button" class="btn btn-default letters" id="letter_R">R</button>
+					<button type="button" class="btn btn-default letters" id="letter_S">S</button>
+					<button type="button" class="btn btn-default letters" id="letter_T">T</button>
+					<button type="button" class="btn btn-default letters" id="letter_U">U</button>
+					<button type="button" class="btn btn-default letters" id="letter_V">V</button>
+					<button type="button" class="btn btn-default letters" id="letter_X">X</button>
+					<button type="button" class="btn btn-default letters" id="letter_Z">Z</button>
+				</div>
+
+			</center>
+			<br>
+			<br>
+			<button type="button" class="btn btn-primary" id="risk-the-answer" data-toggle="modal" data-target="#modal-risk-the-answer" >Chutar</button>
+			<button type="button" class="btn btn-success" id="btn-restart">Próxima Palavra</button>
+		</div>
+
+
+		<div class="modal" id="modal-risk-the-answer" tabindex="-1" role="dialog" aria-labelledby="modal-change-location-label">
+			<form id="form-risk-the-answer">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-change-location-label">Chutar</h4>
+						</div>
+						<div class="modal-body">
+
+								<div class="form-group">
+									<label for="the-anwser">A palavra é:</label>
+									<input type="text" class="form-control" id="the-anwser" autofocus>
+								</div>
+
+						</div>
+						<div class="modal-footer">
+		  					<button type="submit" class="btn btn-primary" id="btn-risk-the-answer">Chutar</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>
