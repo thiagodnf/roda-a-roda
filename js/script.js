@@ -59,7 +59,7 @@ function nextWord(){
 
     $("#risk-the-answer").removeAttr("disabled","disabled");
     $(".letters").removeAttr("disabled");
-    $(".accepted-letter").text("");
+    $(".accepted-letter").html("&nbsp;");
 
     for(var i=0;i<12;i++){
         $("#letter_"+i).show();
