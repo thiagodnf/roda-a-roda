@@ -5,5 +5,8 @@
 	}, {
 		"hint": "casa",
 		"words": ["televisao", "cozinha", "quarto", "banheiro"]
+	}, {
+		"hint": "computador",
+		"words": ["internet", "monitor", "teclado", "mouse","cpu","gabinete"]
 	}]
 }
