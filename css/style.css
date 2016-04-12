@@ -8,6 +8,14 @@ body{
 }
 
 
+
+.col-md-9{
+	margin-top: 5px;
+}
+.col-md-3{
+	margin-top: 5px;
+}
+
 .letters{
 	font-family: 'Consolas', monaco, monospace;
 }
@@ -20,7 +28,7 @@ body{
 
 .answer{
 	font-family: 'Consolas', monaco, monospace;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	margin-right: 0px;
     margin-left: 0px;
 }

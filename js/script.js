@@ -1,19 +1,28 @@
 var selected_word,
-    available_words,
+    available_words = [],
+    correct_sound,
+    applause_sound,
+    wrong_sound,
     is_correct = false,
+    url = "https://spreadsheets.google.com/feeds/list/1K8wj7aNKI4hFHJIxegxAhbbhOF5zYqvMDiHKkmj8jfc/od6/public/values?alt=json"
     words = [];
 
-
 function showTheAnswer(){
-    for(var i=0;i<selected_word.word.length;i++){
+    for(var i = 0; i < selected_word.word.length; i++){
         $("#letter_"+i).text(selected_word.word[i].toUpperCase());
+    }
+}
+
+function vibrate(miliseconds){
+    if(navigator.vibrate){
+        navigator.vibrate(30);
     }
 }
 
 function getAllIndexes(word, letter){
     var indices = [];
 
-    for(var i=0; i<word.length;i++) {
+    for(var i = 0; i < word.length; i++) {
         if (word[i].toUpperCase() == letter.toUpperCase()){
             indices.push(i);
         }
@@ -24,24 +33,31 @@ function getAllIndexes(word, letter){
 
 function finished(){
     $("#modal-congratulations").modal('show');
-    var sound = new Howl({urls: ['mus/applause.mp3']}).play();
+    applause_sound.play();
     showTheAnswer();
     $("#risk-the-answer").attr("disabled","disabled");
     $(".letters").attr("disabled","disabled");
 }
 
 function init(){
-    // enable vibration support
-    navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
-    jQuery.support.cors = true;
+    $.getJSON(url, function (data) {
+      if (data.feed.entry == null) {
+           alert("Erro ao buscar as palavras");
+       } else {
+           $.each(data.feed.entry, function (index, value) {
+               available_words.push({
+                   hint: value.gsx$hint.$t,
+                   words: value.gsx$words.$t.split(","),
+               });
+           });
 
-    $.get("https://raw.githubusercontent.com/thiagodnf/roda-a-roda/master/data/data.json", function(data){
-        $("#content").removeClass("hide");
-        $("#loading").hide();
-        available_words = JSON.parse(data)
-        nextWord();
-    });
+           $("#loading").hide();
+           $("#content").removeClass("hide").hide().fadeIn();
+
+           nextWord();
+       }
+   });
 }
 
 function getIntRandom(min,max){
@@ -49,44 +65,58 @@ function getIntRandom(min,max){
 }
 
 function nextWord(){
-    var index1 = getIntRandom(0, available_words.data.length-1);
-    var index2 = getIntRandom(0, available_words.data[index1].words.length-1);
+    var hintIndex = getIntRandom(0, available_words.length-1);
+    var wordIndex = getIntRandom(0, available_words[hintIndex].words.length-1);
 
-    var hint = available_words.data[index1].hint;
-    var word = available_words.data[index1].words[index2];
-
-    selected_word = {hint:hint, word:word,hits:[]};
+    selected_word = {
+        hint: available_words[hintIndex].hint,
+        word: available_words[hintIndex].words[wordIndex],
+        hits:[]
+    };
 
     $("#risk-the-answer").removeAttr("disabled","disabled");
     $(".letters").removeAttr("disabled");
     $(".accepted-letter").html("&nbsp;");
+    $("#hint").val(selected_word.hint.toUpperCase());
 
-    for(var i=0;i<12;i++){
+    for(var i = 0; i < 12; i++){
         $("#letter_"+i).show();
     }
 
-    for(var i=selected_word.word.length;i<12;i++){
+    for(var i = selected_word.word.length; i < 12; i++){
         $("#letter_"+i).hide();
     }
-
-    $("#hint").val(selected_word.hint.toUpperCase());
 }
 
 $(function(){
 
+    correct_sound = new Howl({urls: ['mus/correct.mp3']});
+    applause_sound = new Howl({urls: ['mus/applause.mp3']});
+    wrong_sound = new Howl({urls: ['mus/wrong-2.mp3']});
+
+    // enable vibration support
+    navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
+    $.ajaxSetup({ cache: true });
+
     $(".letters").click(function(){
+        // Get the user input. The text is the selected letter
         var letter = $(this).text();
 
         var indexes = getAllIndexes(selected_word.word, letter);
 
+        // If there are no indexes, the letters is wrong
         if(indexes.length == 0){
-            if(navigator.vibrate != null) navigator.vibrate(30);
+            vibrate(30);
         }else{
-            var sound = new Howl({urls: ['mus/correct.mp3']}).play();
-            for(var i=0;i<indexes.length;i++){
-                $("#letter_"+indexes[i]).text(letter);
-            }
+            // The user pushes a correct button. Notify s(he) using a sound
+            correct_sound.play();
 
+            // Put the pressed button letter within the right place
+            for(var i = 0; i < indexes.length; i++){
+                $("#letter_"+indexes[i]).text(letter);
+                $("#letter_"+indexes[i]).fadeTo(100, 0.1).fadeTo(200, 1.0);
+            }
         }
 
         var isCorrect = true;
@@ -116,14 +146,20 @@ $(function(){
         if($("#the-anwser").val().toUpperCase() == selected_word.word.toUpperCase()){
             finished();
         }else{
-            alert("Você errou! Tente novamente.")
+            wrong_sound.play();
         }
 
         $("#modal-risk-the-answer").modal('toggle');
     });
 
+    $('#modal-congratulations').on("keypress", function (e) {
+        if (e.which == 13){
+            $(this).modal('toggle');
+        }
+    });
+
     $("#btn-next-word").click(function(){
-        if(navigator.vibrate != null) navigator.vibrate(30);
+        vibrate(30);
         nextWord();
     });
 

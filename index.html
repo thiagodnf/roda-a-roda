@@ -42,14 +42,13 @@
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#"><img src="img/logo-2.png"></a>
 				</div>
-
 			</div>
 		</nav>
 
 		<div class="container">
-			<p id="loading">Carregando</p>
+			<p id="loading">Carregando...</p>
 			<div id="content" class="hide" >
-				<div class="row">
+				<div class="row row-1">
 					<div class="col-md-9">
 						<p>Palavra:</p>
 						<div class="row answer">
@@ -113,7 +112,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-9">
-						<p>&nbsp</p>
+						<p>&nbsp;</p>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1">Dica</span>
 							<input type="text" id="hint" class="form-control" autocomplete="off"  aria-describedby="basic-addon1" disabled="disabled">
@@ -121,7 +120,7 @@
 					</div>
 					<div class="col-md-3">
 						<p>Opções: </p>
-						<button type="button" class="btn btn-primary" id="risk-the-answer" data-toggle="modal" data-target="#modal-risk-the-answer" >Chutar</button>
+						<button type="button" class="btn btn-primary" id="risk-the-answer" data-toggle="modal" data-target="#modal-risk-the-answer" >Responder</button>
 						<button type="button" class="btn btn-success" id="btn-next-word">Próxima Palavra</button>
 					</div>
 				</div>
@@ -136,15 +135,13 @@
 							<h4 class="modal-title" id="modal-change-location-label">Chutar</h4>
 						</div>
 						<div class="modal-body">
-
-								<div class="form-group">
-									<label for="the-anwser">A palavra é:</label>
-									<input type="text" class="form-control" id="the-anwser" autofocus>
-								</div>
-
+							<div class="form-group">
+								<label for="the-anwser">A palavra é:</label>
+								<input type="text" class="form-control" id="the-anwser" autofocus>
+							</div>
 						</div>
 						<div class="modal-footer">
-		  					<button type="submit" class="btn btn-primary" id="btn-risk-the-answer">Chutar</button>
+		  					<button type="submit" class="btn btn-primary" id="btn-risk-the-answer">Responder</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
@@ -167,7 +164,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
