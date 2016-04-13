@@ -2,7 +2,9 @@ var selected_word,
     available_words = [],
     correct_sound,
     applause_sound,
+    fail_sound,
     wrong_sound,
+    is_finished = false;
     is_correct = false,
     url = "https://spreadsheets.google.com/feeds/list/1K8wj7aNKI4hFHJIxegxAhbbhOF5zYqvMDiHKkmj8jfc/od6/public/values?alt=json"
     words = [];
@@ -31,12 +33,21 @@ function getAllIndexes(word, letter){
     return indices;
 }
 
-function finished(){
-    $("#modal-congratulations").modal('show');
-    applause_sound.play();
+function finished(success){
+    if(success){
+        $("#modal-congratulations").modal('show');
+        applause_sound.play();
+    }else{
+        $("#modal-fail").modal('show');
+        fail_sound.play();
+    }
+
     showTheAnswer();
+
     $("#risk-the-answer").attr("disabled","disabled");
     $(".letters").attr("disabled","disabled");
+
+    is_finished = true;
 }
 
 function init(){
@@ -79,6 +90,8 @@ function nextWord(){
     $(".accepted-letter").html("&nbsp;");
     $("#hint").val(selected_word.hint.toUpperCase());
 
+    is_finished = false;
+
     for(var i = 0; i < 12; i++){
         $("#letter_"+i).show();
     }
@@ -93,6 +106,7 @@ $(function(){
     correct_sound = new Howl({urls: ['mus/correct.mp3']});
     applause_sound = new Howl({urls: ['mus/applause.mp3']});
     wrong_sound = new Howl({urls: ['mus/wrong-2.mp3']});
+    fail_sound = new Howl({urls: ['mus/fail.mp3']});
 
     // enable vibration support
     navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
@@ -108,6 +122,7 @@ $(function(){
         // If there are no indexes, the letters is wrong
         if(indexes.length == 0){
             vibrate(30);
+            wrong_sound.play();
         }else{
             // The user pushes a correct button. Notify s(he) using a sound
             correct_sound.play();
@@ -128,7 +143,7 @@ $(function(){
         }
 
         if(isCorrect){
-            finished();
+            finished(true);
         }
 
         $(this).attr("disabled","disabled")
@@ -144,9 +159,9 @@ $(function(){
 
     $("#btn-risk-the-answer").click(function(){
         if($("#the-anwser").val().toUpperCase() == selected_word.word.toUpperCase()){
-            finished();
+            finished(true);
         }else{
-            wrong_sound.play();
+            finished(false)
         }
 
         $("#modal-risk-the-answer").modal('toggle');
@@ -158,9 +173,17 @@ $(function(){
         }
     });
 
+    $('#modal-fail').on("keypress", function (e) {
+        if (e.which == 13){
+            $(this).modal('toggle');
+        }
+    });
+
     $("#btn-next-word").click(function(){
-        vibrate(30);
-        nextWord();
+        if(is_finished || confirm("Deseja realmente ir para a próxima palavra?")){
+            vibrate(30);
+            nextWord();
+        }
     });
 
     init();
