@@ -6,7 +6,7 @@ var selected_word,
     wrong_sound,
     is_finished = false;
     is_correct = false,
-    url = "https://spreadsheets.google.com/feeds/list/1K8wj7aNKI4hFHJIxegxAhbbhOF5zYqvMDiHKkmj8jfc/od6/public/values?alt=json"
+    url = "https://raw.githubusercontent.com/thiagodnf/roda-a-roda/master/database.json"
     words = [];
 
 function showTheAnswer(){

@@ -18,6 +18,6 @@
 	"dependencies": {
 		"serve-static": "",
 		"connect": "",
-		"network":""
-  	}
+		"network": ""
+	}
 }
