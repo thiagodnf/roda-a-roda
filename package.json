@@ -1,7 +1,7 @@
 {
 	"name": "roda-a-roda",
 	"version": "1.0.0",
-	"description": "Jogo Roda a Roda do Silvio Santos",
+	"description": "Jogo baseado no programa Roda a Roda do Silvio Santos",
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js"
@@ -12,9 +12,9 @@
 	"files": [
 		"app.js"
 	],
-	"author": "Thiago do Nascimento Ferreira",
+	"author": "Thiago Ferreira",
 	"license": "MIT",
-	"homepage": "http://thiagodnf.github.io/roda-a-roda",
+	"homepage": "https://thiagodnf.github.io/roda-a-roda/",
 	"dependencies": {
 		"serve-static": "",
 		"connect": "",
